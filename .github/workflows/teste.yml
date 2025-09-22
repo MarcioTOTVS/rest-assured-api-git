@@ -22,8 +22,8 @@ jobs:
 
       - name: Set up Maven #aqui valida se o Maven esta configurado na maquina
         run: |
-          mnv --version 
+          mvn --version 
 
       - name: Build and run tests #basicamente aqui executa o teste. [mvn -Dtest é parametro | TestBasico = nome do teste e mnv é abreviação do Maven
         run: |
-          mnv -Dtest=TestBasico test
+          mvn -Dtest=TestBasico test
