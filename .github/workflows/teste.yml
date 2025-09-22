@@ -1,0 +1,29 @@
+name: Rodar todos os nossos testes
+
+on: #gatilho: toda a vez que eu executar o push, na Branch Master, ou abrir um PR, execute o Jobs abaixo.
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest #rodar sempre em uma maquina linux
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3 #essa action aqui baixa o projeto na maquina Linux
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11' # aqui esta fazendo o setup, configurando o JAVA
+
+      - name: Set up Maven #aqui valida se o Maven esta configurado na maquina
+        run: |
+          mnv --version 
+
+      - name: Build and run tests #basicamente aqui executa o teste. [mvn -Dtest é parametro | TestBasico = nome do teste e mnv é abreviação do Maven
+        run: |
+          mnv -Dtest=TestBasico test
