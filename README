@@ -25,5 +25,5 @@ Gerar Reporte Allure
 ======================
 3. mvn allure:report
 ======================
-4. mnv allure:serve
+4. mvn allure:serve
 ======================
