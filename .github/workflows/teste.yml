@@ -26,4 +26,4 @@ jobs:
 
       - name: Build and run tests #basicamente aqui executa o teste. [mvn -Dtest é parametro | TestBasico = nome do teste e mnv é abreviação do Maven
         run: |
-          mvn -Dtest=teste test
+          mvn -Dtest=BookingTest test
