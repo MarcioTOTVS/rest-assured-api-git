@@ -52,3 +52,12 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }} #token padrão do GitHub Actions
           publish_dir: target/allure-report #diretório do relatório gerado
           # keep_files: true #opcional, mantém arquivos antigos
+      - name: Verificar diretório do relatório Allure #mostra o conteúdo do diretório antes do deploy
+        run: |
+          if [ -d "target/allure-report" ]; then
+            echo "Diretório encontrado. Conteúdo:";
+            ls -l target/allure-report;
+          else
+            echo "ERRO: Diretório target/allure-report não encontrado!";
+            exit 1;
+          fi
