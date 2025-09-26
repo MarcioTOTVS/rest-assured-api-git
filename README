@@ -1,0 +1,29 @@
+Comandos de Execução:
+
+1. Rodar todos os testes mvn test
+======================
+2. Rodar testes de uma classe específica
+mvn -Dtest=Nome DaClasseDeTeste test
+
+exemplo:
+mvn -Dtest-BookingTest test
+======================
+3. Rodar métodos específicos de uma classe
+mvn -Dtest=NomeDaClasseDeTeste#nomeDoMetodo test
+
+exemplo:
+mvn -Dtest=BookingTest#cadastrarReserva test
+======================
+4. Rodar testes por tag (com JUnit 5)
+@Tag("api")
+mvn test -Dgroups=cadastro
+
+Gerar Reporte Allure
+1. mvn test
+======================
+2. mvn clean test
+======================
+3. mvn allure:report
+======================
+4. mnv allure:serve
+======================

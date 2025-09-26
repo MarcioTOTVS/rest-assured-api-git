@@ -14,8 +14,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
 
+    <dependencies>
         <!-- Rest Assured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -55,5 +61,41 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Essa dependência permite que o Allure capture os eventos dos testes feitos com JUnit 5 e gere relatórios ricos com base nisso. -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.23.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Plugin do Surefire para executar os testes e integrar com o Allure -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>io.qameta.allure.junitplatform.AllureJunitPlatform</value>
+                        </property>
+                    </properties>
+                    <systemPropertyVariables>
+                        <allure.results.directory>target/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <!-- Plugin do Allure para gerar relatórios -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.15.2</version>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
