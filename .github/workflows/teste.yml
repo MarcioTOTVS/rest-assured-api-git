@@ -57,6 +57,12 @@ jobs:
           if [ -d "target/allure-report" ]; then
             echo "Diretório encontrado. Conteúdo:";
             ls -l target/allure-report;
+            if [ "$(ls -A target/allure-report)" ]; then
+              echo "Relatório Allure gerado com sucesso.";
+            else
+              echo "ERRO: Diretório target/allure-report está vazio!";
+              exit 1;
+            fi
           else
             echo "ERRO: Diretório target/allure-report não encontrado!";
             exit 1;
