@@ -34,6 +34,26 @@ jobs:
           sudo apt-get update
           sudo apt-get install allure -y
 
+      - name: Mostrar resultado dos testes
+        run: |
+          cat target/surefire-reports/*.txt || echo "Nenhum relatório de teste encontrado."
+
+      - name: Verificar diretório de resultados do Allure
+        run: |
+          if [ -d "target/allure-results" ]; then
+            echo "Diretório target/allure-results encontrado. Conteúdo:";
+            ls -l target/allure-results;
+            if [ "$(ls -A target/allure-results)" ]; then
+              echo "Resultados de teste encontrados.";
+            else
+              echo "ERRO: Diretório target/allure-results está vazio!";
+              exit 1;
+            fi
+          else
+            echo "ERRO: Diretório target/allure-results não encontrado!";
+            exit 1;
+          fi
+
       - name: Gerar relatório Allure #gera o relatório Allure a partir dos resultados dos testes
         run: |
           allure generate target/allure-results --clean -o target/allure-report
