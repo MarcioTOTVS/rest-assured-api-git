@@ -20,10 +20,10 @@ jobs:
           distribution: 'temurin'
           java-version: '11' # aqui esta fazendo o setup, configurando o JAVA
 
-      - name: Set up Maven #aqui valida se o Maven esta configurado na maquina
+      - name: Set up Maven #aqui valida se o Maven esta configurado na maquina Linux
         run: |
           mvn --version 
 
       - name: Build and run tests #basicamente aqui executa o teste. [mvn -Dtest é parametro | TestBasico = nome do teste e mnv é abreviação do Maven
         run: |
-          mvn -Dtest=TesteBasico test
+          mvn -Dtest=BuscarReservas test
