@@ -28,8 +28,19 @@ public class BookingTest {
 
     @Tag("BuscaId")
     @Test
-    public void buscarReservasId() {
-        bookingEndpoint.buscarReservasId();
+    public void buscarReservasId() throws IOException {
+        String jsonBody = lerJson("src/test/resources/payloads/reserva.json");
+        int reservaId = bookingEndpoint.cadastrarReserva(jsonBody);
+        bookingEndpoint.buscarReservasId(
+            reservaId,
+            "Marcio",
+            "Silva",
+            3,
+            true,
+            "2025-09-25",
+            "2025-09-30",
+            "ACT D"
+        );
     }
 
     @Tag("Cadastro")

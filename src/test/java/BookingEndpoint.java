@@ -18,23 +18,21 @@ public class BookingEndpoint {
                 .log().all();
     }
 
-    public void buscarReservasId () {
+    public void buscarReservasId(int reservaId, String firstname, String lastname, int totalprice, boolean depositpaid, String checkin, String checkout, String additionalneeds) {
         RestAssured.baseURI = BASE_URL;
-
-        String reservaId = "reserveId";
         given()
                 .header("Accept", "application/json")
                 .when()
-                .get("/booking/" + reservaId) // Busca pelo ID salvo
+                .get("/booking/" + reservaId)
                 .then()
                 .statusCode(200)
-                .body("firstname", equalTo("Marcio"))
-                .body("lastname", equalTo("Silva"))
-                .body("totalprice", equalTo(3))
-                .body("depositpaid", is(true))
-                .body("bookingdates.checkin", equalTo("2025-09-25"))
-                .body("bookingdates.checkout", equalTo("2025-09-30"))
-                .body("additionalneeds", equalTo("ACT D"))
+                .body("firstname", equalTo(firstname))
+                .body("lastname", equalTo(lastname))
+                .body("totalprice", equalTo(totalprice))
+                .body("depositpaid", is(depositpaid))
+                .body("bookingdates.checkin", equalTo(checkin))
+                .body("bookingdates.checkout", equalTo(checkout))
+                .body("additionalneeds", equalTo(additionalneeds))
                 .log().all();
     }
 
