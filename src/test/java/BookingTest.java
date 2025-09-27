@@ -19,34 +19,23 @@ public class BookingTest {
         return new String(Files.readAllBytes(Paths.get(caminhoArquivo)));
     }
 
-    // Define um método de teste para buscar reservas
-    @Tag("Busca")
-    @Test
-    public void buscarReservas() {
-        bookingEndpoint.buscarReservas();
-    }
-
-    @Tag("BuscaId")
-    @Test
-    public void buscarReservasId() throws IOException {
-        String jsonBody = lerJson("src/test/resources/payloads/reserva.json");
-        int reservaId = bookingEndpoint.cadastrarReserva(jsonBody);
-        bookingEndpoint.buscarReservasId(
-            reservaId,
-            "Marcio",
-            "Silva",
-            3,
-            true,
-            "2025-09-25",
-            "2025-09-30",
-            "ACT D"
-        );
-    }
-
     @Tag("Cadastro")
     @Test
     public void cadastrarReserva() throws IOException {
         String jsonBody = lerJson("src/test/resources/payloads/reserva.json");
         int reservaId = bookingEndpoint.cadastrarReserva(jsonBody);
+
+    }
+    @Tag("CadastroEBusca")
+    @Test
+    public void cadastrarEBuscarReserva() throws IOException {
+        String jsonBody = lerJson("src/test/resources/payloads/reserva.json");
+        int reservaId = bookingEndpoint.cadastrarReserva(jsonBody);
+        bookingEndpoint.buscarReservasId(reservaId);
+    }
+    @Tag("BuscarReservas")
+    @Test
+    public void buscarTodasReservas() {
+        bookingEndpoint.buscarReservas();
     }
 }
